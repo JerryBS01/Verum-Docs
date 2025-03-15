@@ -8,21 +8,32 @@ function createTooltip(text) {
 }
 
 // Function to highlight text and add tooltip behavior
-function highlightAndAddTooltip(targetText, tooltipText, num) {
-    const regex = new RegExp(`(${targetText})`, "gi");
-    
-    document.querySelectorAll("p, span, div").forEach((node) => {
-        if (node.childNodes.length === 1 && node.nodeType === Node.ELEMENT_NODE) {
-            let match = node.innerHTML.match(regex);
-            if (match) {
-                node.innerHTML = node.innerHTML.replace(regex, `<span class="highlighted-text">$1</span>`);
+function highlightAndAddTooltip(targetTextArray, tooltipTextArray) {
+    if (targetTextArray.length !== tooltipTextArray.length) {
+        console.error('The number of target texts and tooltip texts must be the same.');
+        return;
+    }
+
+    // Loop through the target texts and create a regular expression for each
+    targetTextArray.forEach((targetText, index) => {
+        const regex = new RegExp(`(${targetText})`, "gi");
+
+        // Loop through each paragraph, span, and div
+        document.querySelectorAll("p, span, div").forEach((node) => {
+            if (node.childNodes.length === 1 && node.nodeType === Node.ELEMENT_NODE) {
+                let match = node.innerHTML.match(regex);
+                if (match) {
+                    node.innerHTML = node.innerHTML.replace(regex, `<span class="highlighted-text" data-tooltip="${tooltipTextArray[index]}">$1</span>`);
+                }
             }
-        }
+        });
     });
 
     // Add event listeners for tooltip
     document.querySelectorAll(".highlighted-text").forEach((element) => {
         let tooltip;
+        const tooltipText = element.getAttribute('data-tooltip'); // Get unique tooltip text from data attribute
+        
         element.addEventListener("mouseenter", (event) => {
             tooltip = createTooltip(tooltipText);
             tooltip.style.left = event.pageX + "px";
@@ -79,12 +90,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       // Now, you can use this data to manipulate the DOM or highlight text
       // Example: highlight sentences based on API response
       if (data) {
+        let texts = []
         let reasons = data?.["gpt_bias_analysis"]?.["reasons"];
         let sentences = []
         for (const num in reasons) {
             console.log(reasons[num]);
-            highlightAndAddTooltip(reasons[num]["sentence"], reasons[num]["sentence"], num);
+            texts.push(reasons[num]["description"]);
+            sentences.push(reasons[num]["sentence"]);
         }
+        console.log(sentences, texts)
+        highlightAndAddTooltip(sentences, texts)
       }
     }
   });
