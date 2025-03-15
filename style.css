@@ -131,6 +131,11 @@ html {
     line-height: 1.6;
 }
 
+a {
+    color: #1a73e8;
+    /* Blue color */
+}
+
 .slide-list {
     text-align: left;
     font-size: 1.2rem;

@@ -14,7 +14,7 @@ Verum leverages two state-of-the-art AI models to assess and categorize news art
 
 ---
 
-## Features 🌟
+## Integrations 🌟
 
 ### GPT-4 Turbo and roBERTa-base Integration 🚀
 
