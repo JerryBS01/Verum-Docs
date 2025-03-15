@@ -1,4 +1,4 @@
-# <img src="images/verum_logo.jpg" style="width: 50px; height: 50px; margin-right: 10px; vertical-align: middle;" /> Verum Documentation 🎉
+# <img src="images/Verum_logo.jpg" style="width: 50px; height: 50px; margin-right: 10px; vertical-align: middle;" /> Verum Documentation 🎉
 
 Welcome to **Verum's** official documentation! This guide will help you understand how to use Verum, a tool for analyzing the bias in news articles using cutting-edge AI models. Below you'll find instructions on installation, usage, and more. 🎉✨
 
