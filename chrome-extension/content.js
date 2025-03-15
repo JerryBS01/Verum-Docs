@@ -8,7 +8,7 @@ function createTooltip(text) {
 }
 
 // Function to highlight text and add tooltip behavior
-function highlightAndAddTooltip(targetText, tooltipText) {
+function highlightAndAddTooltip(targetText, tooltipText, num) {
     const regex = new RegExp(`(${targetText})`, "gi");
     
     document.querySelectorAll("p, span, div").forEach((node) => {
@@ -38,12 +38,12 @@ function highlightAndAddTooltip(targetText, tooltipText) {
 }
 
 // Get words to highlight from storage
-chrome.storage.sync.get("highlightSentences", (data) => {
-    let sentences = data.highlightSentences || ["Five Russian citizens, including the captain, were on board the container vessel, Russian media reported, citing the embassy.", "Challenges for modern shipping"];
-    sentences.forEach((sentence) => {
-        highlightAndAddTooltip(sentence, "Stay focused! 🧠");
-    });
-});
+// chrome.storage.sync.get("highlightSentences", (data) => {
+//     let sentences = data.highlightSentences || ["Five Russian citizens, including the captain, were on board the container vessel, Russian media reported, citing the embassy.", "Challenges for modern shipping"];
+//     sentences.forEach((sentence) => {
+//         highlightAndAddTooltip(sentence, "Stay focused! 🧠");
+//     });
+// });
 
 function extractArticle() {
     let articleElement = document.querySelector("article");
@@ -71,4 +71,21 @@ function extractArticle() {
     });
 }
 
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "apiResponse") {
+      const data = message.response;
+      console.log("Received API Response in Content Script:", data);
+      // Now, you can use this data to manipulate the DOM or highlight text
+      // Example: highlight sentences based on API response
+      if (data) {
+        let reasons = data?.["gpt_bias_analysis"]?.["reasons"];
+        let sentences = []
+        for (const num in reasons) {
+            console.log(reasons[num]);
+            highlightAndAddTooltip(reasons[num]["sentence"], reasons[num]["sentence"], num);
+        }
+      }
+    }
+  });
 extractArticle();
