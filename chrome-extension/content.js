@@ -14,11 +14,9 @@ function highlightAndAddTooltip(targetTextArray, tooltipTextArray) {
         return;
     }
 
-    // Loop through the target texts and create a regular expression for each
     targetTextArray.forEach((targetText, index) => {
         const regex = new RegExp(`(${targetText})`, "gi");
 
-        // Loop through each paragraph, span, and div
         document.querySelectorAll("p, span, div").forEach((node) => {
             if (node.childNodes.length === 1 && node.nodeType === Node.ELEMENT_NODE) {
                 let match = node.innerHTML.match(regex);
@@ -29,15 +27,14 @@ function highlightAndAddTooltip(targetTextArray, tooltipTextArray) {
         });
     });
 
-    // Add event listeners for tooltip
     document.querySelectorAll(".highlighted-text").forEach((element) => {
         let tooltip;
-        const tooltipText = element.getAttribute('data-tooltip'); // Get unique tooltip text from data attribute
-        
+        const tooltipText = element.getAttribute('data-tooltip'); 
+
         element.addEventListener("mouseenter", (event) => {
             tooltip = createTooltip(tooltipText);
             tooltip.style.left = event.pageX + "px";
-            tooltip.style.top = event.pageY + 20 + "px"; // Offset tooltip a bit
+            tooltip.style.top = event.pageY + 20 + "px"; 
         });
 
         element.addEventListener("mouseleave", () => {
@@ -48,14 +45,7 @@ function highlightAndAddTooltip(targetTextArray, tooltipTextArray) {
     });
 }
 
-// Get words to highlight from storage
-// chrome.storage.sync.get("highlightSentences", (data) => {
-//     let sentences = data.highlightSentences || ["Five Russian citizens, including the captain, were on board the container vessel, Russian media reported, citing the embassy.", "Challenges for modern shipping"];
-//     sentences.forEach((sentence) => {
-//         highlightAndAddTooltip(sentence, "Stay focused! 🧠");
-//     });
-// });
-
+// Extract article content
 function extractArticle() {
     let articleElement = document.querySelector("article");
 
@@ -64,35 +54,30 @@ function extractArticle() {
         return;
     }
 
-    // Select only paragraphs inside the article, excluding GridItem and GridRow
     let paragraphs = articleElement.querySelectorAll("p:not([data-component='GridItem']):not([data-component='GridRow'])");
 
-    // Filter out irrelevant short texts
     let articleText = Array.from(paragraphs)
         .map(p => p.innerText.trim())
-        .filter(text => text.length > 50) // Ignore very short texts (like captions or ads)
+        .filter(text => text.length > 50)
         .join("\n\n");
 
-    console.log("Extracted Main Article:", articleText); // ✅ Logs only meaningful content
+    console.log("Extracted Main Article:", articleText); 
 
-    // Send the extracted content to the popup
     chrome.runtime.sendMessage({
         action: "sendArticle",
         article: articleText
     });
 }
 
-
+// Listen for the API response in content.js
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "apiResponse") {
       const data = message.response;
       console.log("Received API Response in Content Script:", data);
-      // Now, you can use this data to manipulate the DOM or highlight text
-      // Example: highlight sentences based on API response
       if (data) {
-        let texts = []
+        let texts = [];
         let reasons = data?.["gpt_bias_analysis"]?.["reasons"];
-        let sentences = []
+        let sentences = [];
         for (const num in reasons) {
             console.log(reasons[num]);
             texts.push(reasons[num]["description"]);
@@ -102,5 +87,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         highlightAndAddTooltip(sentences, texts)
       }
     }
-  });
+});
+
 extractArticle();
