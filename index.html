@@ -16,6 +16,21 @@
     />
     <link rel="stylesheet" href="style.css" />
   </head>
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="logo-header">
+      <img src="images/Verum_logo.jpg" alt="Verum logo" />
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#what-is-verum">What is Verum?</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#how-to-use">How to Use</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <body>
     <div class="scroll-icon top">
@@ -23,7 +38,7 @@
     </div>
 
     <div class="slides-container">
-      <div class="slide active" id="slide1">
+      <div class="slide active" id="home">
         <div class="slide-content">
           <img src="images/Verum_logo.jpg" alt="Verum logo" />
           <h1 class="slide-title">Verum: Your Truth to Unbiased News</h1>
@@ -34,7 +49,7 @@
         </div>
       </div>
 
-      <div class="slide" id="slide2">
+      <div class="slide" id="what-is-verum">
         <div class="slide-content">
           <h1 class="slide-title">What is Verum?</h1>
           <p class="slide-description">
@@ -46,8 +61,8 @@
             <li>Easy-to-read insights</li>
             <li>Source-based intepretation</li>
           </ul>
-          <p class="slide-description">
-            Source:
+          <p class="slide-list">
+            github:
             <a href="https://github.com/JerryBS01/Verum-Docs"
               >https://github.com/JerryBS01/Verum-Docs</a
             >
@@ -55,7 +70,7 @@
         </div>
       </div>
 
-      <div class="slide" id="slide3">
+      <div class="slide" id="how-it-works">
         <div class="slide-content">
           <h1 class="slide-title">How Does Verum Work?</h1>
           <p class="slide-description">
@@ -63,14 +78,15 @@
             credibility.
           </p>
           <ol class="slide-list">
-            <li>Scans the article for key phrases and claims.</li>
-            <li>Compares the content against verified databases.</li>
-            <li>Generates a bias and accuracy score.</li>
+            <li>Scans the article and understand the context ofthe article</li>
+            <li>Checks the biasness of the content.</li>
+            <li>Provides reasons on the biasness.</li>
+            <li>Highlights where the biasness lies within the artical.</li>
           </ol>
         </div>
       </div>
 
-      <div class="slide" id="slide4">
+      <div class="slide" id="installation">
         <div class="slide-content">
           <h1 class="slide-title">How to Install Verum</h1>
           <p class="slide-description">
@@ -91,7 +107,7 @@
         </div>
       </div>
 
-      <div class="slide" id="slide5">
+      <div class="slide" id="how-to-use">
         <div class="slide-content">
           <h1 class="slide-title">How to Use Verum</h1>
           <p class="slide-description">
@@ -100,7 +116,7 @@
           <ol class="slide-list">
             <li>Open any news article or blog.</li>
             <li>Click the Verum icon in your browser toolbar.</li>
-            <li>View the bias and accuracy analysis.</li>
+            <li>Click on the analyse button .</li>
             <li>Explore detailed insights and sources.</li>
           </ol>
         </div>
@@ -110,77 +126,7 @@
     <div class="scroll-icon bottom">
       <i class="fas fa-chevron-up"></i>
     </div>
-
-    <section class="spacer">
-      <div class="spacer-content">
-        <div class="how-to-use">
-          <h2>How to Use 📝</h2>
-          <ol>
-            <li>
-              <strong>Open a News/Blog Post</strong><br />Open any news article
-              or blog post you want to analyze for bias.
-            </li>
-            <li>
-              <strong>Activate the Extension</strong><br />Activate the Verum
-              extension by clicking on the extension icon in your browser.
-            </li>
-            <li>
-              <strong>Click "Start Analyze"</strong><br />Once the extension is
-              activated, click the "Start Analyze" button to begin the analysis
-              process.
-            </li>
-            <li>
-              <strong>Wait for Analysis to Load</strong><br />Allow a few
-              seconds for the tool to process and analyze the content. Verum
-              will start evaluating bias and contextualizing the content.
-            </li>
-            <li>
-              <strong>See Highlights and Bias Indicator</strong><br />You will
-              see different parts of the webpage being highlighted to indicate
-              where the bias lies. A bias indicator will appear in the pop-up,
-              showing whether the article is biased or unbiased.
-            </li>
-            <li>
-              <strong>Color-Coded Bias Dots</strong><br />Bias reasons are
-              displayed as color-coded dots. Each dot corresponds to a specific
-              part of the article that's highlighted. Hover over any highlighted
-              section, and the tool will show you an in-depth analysis of why
-              it's biased (or unbiased).
-            </li>
-          </ol>
-        </div>
-        <div>
-          <h2>Features 🚀</h2>
-          <ul class="features-list">
-            <li>
-              <p>
-                <strong>Real-time Bias Detection:</strong> Get immediate results
-                with color-coded bias reasons for articles.
-              </p>
-            </li>
-            <li>
-              <p>
-                <strong>Easy-to-Use Interface:</strong> The extension seamlessly
-                integrates with your browser.
-              </p>
-            </li>
-            <li>
-              <p>
-                <strong>Contextual Explanations:</strong> Hover over highlighted
-                areas for detailed explanations of bias.
-              </p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer">
-        <p>
-          Created by Anastasya Farikha, Francis Anthony, Hansel Liebrata, and
-          Jerry Susanto
-        </p>
-        <p class="rights-reserved">© 2025 Verum. All rights reserved.</p>
-      </div>
-    </section>
+    <section class="spacer"></section>
 
     <script src="script.js"></script>
   </body>
