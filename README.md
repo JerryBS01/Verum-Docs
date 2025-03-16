@@ -25,6 +25,12 @@ Verum combines two of the most reliable language models in the field:
 
 The **roBERTa-base** model is specifically trained on a large dataset of political articles to recognize nuanced biases and determine if an article presents a balanced view.
 
+### Links 🔗
+
+- Base Model: [https://huggingface.co/FacebookAI/roberta-base](https://huggingface.co/FacebookAI/roberta-base)
+- Dataset: [https://github.com/ramybaly/Article-Bias-Prediction](https://github.com/ramybaly/Article-Bias-Prediction)
+- Guide: [https://huggingface.co/docs/transformers/en/training](https://huggingface.co/docs/transformers/en/training)
+
 ---
 
 ## How to Use 📝
@@ -61,6 +67,11 @@ By following these simple steps, you’ll be able to easily analyze the bias of 
 - **Real-time Bias Detection**: Get immediate results with color-coded bias reasons for articles.
 - **Easy-to-Use Interface**: The extension seamlessly integrates with your browser.
 - **Contextual Explanations**: Hover over highlighted areas for detailed explanations of bias.
+
+## Paid Services 💸
+
+- OpenAI API (GPT-4 Turbo)
+- OVH Server (for backend)
 
 ---
 
