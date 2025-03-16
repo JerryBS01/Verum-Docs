@@ -38,28 +38,25 @@ function showSlide(index) {
         isTransitioning = false;
     }, 500); // Match this duration with the CSS transition duration
 }
+let scrollThreshold = 250; // Adjust this value to control sensitivity
+let scrollDelta = 0; // Track accumulated scroll distance
 
 function handleScroll(event) {
     if (isTransitioning) return; // Ignore scroll events during transition
 
-    if (event.deltaY > 0) {
-        // Scroll down
-        if (currentSlide < totalSlides - 1) {
+    scrollDelta += event.deltaY; // Accumulate scroll movement
+
+    if (Math.abs(scrollDelta) >= scrollThreshold) { 
+        if (scrollDelta > 0 && currentSlide < totalSlides - 1) {
             showSlide(currentSlide + 1);
-        } else if (currentSlide === totalSlides - 1) {
-            // Allow exiting the slides section from the last slide
-            isSlidesLocked = false;
-        }
-    } else if (event.deltaY < 0) {
-        // Scroll up
-        if (currentSlide > 0) {
+        } else if (scrollDelta < 0 && currentSlide > 0) {
             showSlide(currentSlide - 1);
-        } else if (currentSlide === 0) {
-            // Allow exiting the slides section from the first slide
-            isSlidesLocked = false;
         }
+        scrollDelta = 0; // Reset scroll accumulation after switching slides
     }
 }
+
+
 
 // Use IntersectionObserver to detect when the slides section is in view
 const slidesContainer = document.querySelector('.slides-container');
@@ -80,14 +77,30 @@ const observer = new IntersectionObserver(
     { threshold: 1.0 } // Trigger when 100% of the slides container is visible
 );
 
+document.querySelectorAll(".nav-links a").forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+        e.preventDefault(); // Prevent default anchor behavior
+
+        const targetId = this.getAttribute("href").substring(1); // Get section ID
+        const targetIndex = [...slides].findIndex(slide => slide.id === targetId); // Find index
+
+        if (targetIndex !== -1) {
+            showSlide(targetIndex); // Switch to the correct slide
+        }
+    });
+});
+
+  
+
 observer.observe(slidesContainer);
 
-// Prevent default scrolling behavior when the slides section is locked
+// Only prevent scrolling inside slides
 window.addEventListener('wheel', (event) => {
-    if (isSlidesLocked) {
-        event.preventDefault(); // Prevent default scrolling
+    if (isSlidesLocked && currentSlide < totalSlides - 1) {
+        event.preventDefault(); // Prevent default scrolling ONLY inside slides
     }
 }, { passive: false });
+
 
 // Initialize the first slide
 showSlide(currentSlide);
