@@ -150,8 +150,7 @@ html {
     font-size: 3rem;
     transition: transform 1.0s ease-in-out;
     transform: translateY(100%);
-    border-radius: 50px;
-    margin-left: 10px;
+    border-radius: 30px;
 }
 
 .slide.active {
