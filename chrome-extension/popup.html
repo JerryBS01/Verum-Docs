@@ -1,39 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus Mode</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: white;
-            width: 280px;
-            margin: 2px;
-        }
-        .container {
-            background-color: #362E2D;
-            padding: 20px;
-        }
-        #startButton {
-            padding: 10px 15px;
-            font-size: 14px;
-            background-color: #E3311C;
-            color: white;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-        }
-        #startButton:hover {
-            background-color: #881d11;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verum Bias Detector</title>
+  <style>
+    /* Reset default margins/padding */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Main body styling */
+    body {
+      background-color: #362E2D; /* Dark background */
+      color: #ffffff;           /* White text */
+      font-family: Arial, sans-serif;
+      width: 350px;
+      min-height: 300px;
+      margin: 0 auto;
+    }
+
+    /* Top bar container */
+    .topbar {
+      position: relative; /* Allows absolute positioning of the close button */
+      text-align: center; /* Centers logo + name horizontally */
+      padding: 16px;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      border-radius: 4px; /* Slightly rounded corners */
+    }
+
+    .extension-name {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* Close (X) button in top-right corner */
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Main content area, centered text */
+    .content {
+      padding: 12px;       /* Reduced padding to decrease vertical space */
+      text-align: center;
+    }
+
+    /* Explanation box */
+    .explanation {
+      background-color: #4A4747;
+      padding: 12px;
+      margin: 8px 0;       /* Reduced margin to tighten spacing */
+      border-radius: 4px;
+    }
+    .explanation h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: normal;
+    }
+    .explanation p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    /* Placeholder text (below the explanation box) */
+    .placeholder-text {
+      margin: 8px 0;       /* Small margin to reduce extra space */
+      font-size: 14px;
+      line-height: 1.4;
+      color: #ffffff;
+    }
+
+    /* Analyze Button */
+    #startButton {
+      padding: 10px 15px;
+      font-size: 14px;
+      background-color: #E3311C;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      margin-top: 12px;    /* Slightly smaller top margin */
+    }
+    #startButton:hover {
+      background-color: #881d11;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <button id="startButton">Check This Article</button>
+  <!-- Top bar with logo, extension name, and close button -->
+  <div class="topbar">
+    <img class="logo" src="icon.png" alt="Verum Logo" />
+    <span class="extension-name">Verum Bias Detecor</span>
+    <button class="close-btn" id="closeButton">×</button>
+  </div>
+
+  <!-- Main content section -->
+  <div class="content">
+    <!-- Explanation box with a different background color -->
+    <div class="explanation">
+      <h3>Quickly detect and analyze biases in any article 
+        and web content using ChatGPT-powered insights.</h3>
     </div>
-    <script src="popup.js"></script>
+
+    <!-- Placeholder text with a brief instruction -->
+    <p class="placeholder-text">
+        Click "Analyze Bias" to scan this page for bias.
+    </p>
+
+    <!-- Analyze button -->
+    <button id="startButton">Analyze Bias</button>
+  </div>
+  
+  <!-- Your script, if needed -->
+  <script src="popup.js"></script>
 </body>
 </html>
